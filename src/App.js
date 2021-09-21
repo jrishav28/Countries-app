@@ -11,6 +11,7 @@ function App() {
   const region = useSelector(selectRegion);
   const countries = useSelector(selectCountries);
 
+  const [country, setCountry] = useState("Algeria");
   useEffect(() => {
     async function display_countries() {
       const res = await axios.get(
@@ -42,7 +43,7 @@ function App() {
       </div>
 
       <div className="country-names">
-        <select>
+        <select onChange={(e) => setCountry(e.target.value)}>
           {countries &&
             countries.map((data, i) => {
               return (
@@ -52,6 +53,21 @@ function App() {
               );
             })}
         </select>
+      </div>
+
+      <div className="details">
+        <p>{`Region : ${region}`}</p>
+        {countries.map((val, i) => {
+          if (val["name"] === `${country}`)
+            return (
+              <div>
+                <p>{`Country : ${country}`}</p>
+                <p>{`Population : ${val["population"]}`}</p>
+                <p>{`Capital : ${val["capital"]}`}</p>
+                <img src={val["flag"]} alt="Flag" />
+              </div>
+            );
+        })}
       </div>
     </div>
   );
