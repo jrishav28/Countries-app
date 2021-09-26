@@ -1,76 +1,81 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-
+import React from "react";
+import { connect } from "react-redux";
+import loadCountry from "./actions";
 import "./App.css";
-import { selectRegion, setRegion } from "./region/regionSlice";
-import { selectCountries, setCountries } from "./countriesSlice/countriesSlice";
+import PokeDetails from "./components/PokeDetails";
 
-function App() {
-  const dispatch = useDispatch();
-  const region = useSelector(selectRegion);
-  const countries = useSelector(selectCountries);
+export class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.allPoke = ["charmeleon", "charizard", "squirtle", "wartortle"];
+  }
 
-  const [country, setCountry] = useState("Algeria");
-  useEffect(() => {
-    async function display_countries() {
-      const res = await axios.get(
-        `https://restcountries.eu/rest/v2/region/${region}`
-      );
-      console.log(res.data);
-      dispatch(setCountries({ countries: res.data }));
-    }
-    display_countries();
-  }, [region]);
+  componentDidMount() {
+    this.props.changeRegion();
+  }
 
-  const select_region = (e) => {
-    dispatch(setRegion({ region: `${e.target.value}` }));
-  };
+  render() {
+    console.log(this.props);
+    const { state, changeRegion } = this.props;
+    return (
+      <div className="App">
+        {state ? (
+          <>
+            <header>
+              <h1>Know Your Pokemon</h1>
+            </header>
+            <div className="region-names">
+              <h2>Select Pokemon :</h2>
+              <select
+                id="region"
+                onChange={(e) => changeRegion(e.target.value)}
+              >
+                {this.allPoke.map((reg, i) => {
+                  return (
+                    <option key={i} value={reg}>
+                      {reg}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
 
-  return (
-    <div className="App">
-      <header>
-        <h1>Countries By Region</h1>
-      </header>
-
-      <div className="region-names">
-        <select id="region" onChange={(e) => select_region(e)}>
-          <option value="africa">Africa</option>
-          <option value="asia">Asia</option>
-          <option value="europe">Europe</option>
-          <option value="americas">Americas</option>
-        </select>
+            <div className="country-names">
+              <h2> Select Abilites : </h2>
+              <select>
+                {state &&
+                  state.abilities.map((data, i) => {
+                    return (
+                      <option key={i} value={data.ability.name}>
+                        {data.ability.name}
+                      </option>
+                    );
+                  })}
+              </select>
+            </div>
+            <div>
+              <PokeDetails state={state} />
+            </div>
+          </>
+        ) : (
+          <h1>error 404 :: page not found </h1>
+        )}
       </div>
-
-      <div className="country-names">
-        <select onChange={(e) => setCountry(e.target.value)}>
-          {countries &&
-            countries.map((data, i) => {
-              return (
-                <option key={i} value={data.name}>
-                  {data.name}
-                </option>
-              );
-            })}
-        </select>
-      </div>
-
-      <div className="details">
-        <p>{`Region : ${region}`}</p>
-        {countries.map((val, i) => {
-          if (val["name"] === `${country}`)
-            return (
-              <div>
-                <p>{`Country : ${country}`}</p>
-                <p>{`Population : ${val["population"]}`}</p>
-                <p>{`Capital : ${val["capital"]}`}</p>
-                <img src={val["flag"]} alt="Flag" />
-              </div>
-            );
-        })}
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    state: state.data,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeRegion: (value) => {
+      dispatch(loadCountry(value));
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

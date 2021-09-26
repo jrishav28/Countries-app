@@ -1,7 +1,7 @@
 * {
   margin: 0;
   color: rgb(42, 185, 204);
-  background-color: rgb(26, 16, 7);
+  background-color: rgba(24, 26, 7, 0.993);
 }
 .App {
   margin: auto;
@@ -14,9 +14,24 @@ h1 {
   height: inherit;
   background-color: #f5deb3;
 }
+button {
+  background-color: aliceblue;
+  margin-left: 400px;
+}
+h3 {
+  margin-left: 400px;
+}
+h2,
+h4 {
+  margin-right: 30px;
+  color: white;
+}
 .region-names {
   width: 100%;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  /* text-align: center; */
   padding: 10px;
   /* width: 200px; */
 }
@@ -29,6 +44,9 @@ h1 {
 }
 
 .country-names {
+  width: 100%;
+  display: flex;
+  justify-content: center;
   padding: 10px;
   width: 100%;
   text-align: center;
@@ -41,12 +59,18 @@ h1 {
   color: rgb(186, 204, 28);
 }
 .details {
-  margin-left: 35%;
-  /* text-align: center; */
-  border: 5px solid red;
-  width: 400px;
-  padding: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
   color: white;
+}
+.inner {
+  /* align-self: center; */
+  border: 5px solid red;
+  border-radius: 5px;
+  padding: 5px;
+  width: 400px;
 }
 .details p {
   font-family: "Times New Roman", Times, serif;
@@ -57,7 +81,8 @@ h1 {
   padding: 5px;
 }
 .details img {
-  margin-top: 10px;
+  background-color: rgb(228, 219, 202);
+  margin-top: 4px;
   width: 400px;
   height: 200px;
 }
