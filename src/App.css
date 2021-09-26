@@ -26,7 +26,7 @@ h4 {
   margin-right: 30px;
   color: white;
 }
-.region-names {
+.poke-names {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -35,7 +35,7 @@ h4 {
   padding: 10px;
   /* width: 200px; */
 }
-.region-names select {
+.poke-names select {
   border-radius: 10px;
   font-size: x-large;
   padding: 5px;
@@ -43,7 +43,7 @@ h4 {
   color: rgb(235, 158, 225);
 }
 
-.country-names {
+.poke-abilities {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -51,7 +51,7 @@ h4 {
   width: 100%;
   text-align: center;
 }
-.country-names select {
+.poke-abilities select {
   border-radius: 10px;
   padding: 5px;
   background-color: rgba(216, 191, 216, 0.24);

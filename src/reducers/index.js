@@ -2,7 +2,7 @@ const initialState = {
   data: null,
 };
 
-const RegionReducer = (state = initialState, action) => {
+const pokeReducer = (state = initialState, action) => {
   switch (action.type) {
     case "CHANGE_REGION":
       return {
@@ -19,4 +19,4 @@ const RegionReducer = (state = initialState, action) => {
   }
 };
 
-export default RegionReducer;
+export default pokeReducer;

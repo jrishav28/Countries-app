@@ -1,22 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
-import loadCountry from "./actions";
+import getPoke from "./actions";
 import "./App.css";
-import PokeDetails from "./components/PokeDetails";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.allPoke = ["charmeleon", "charizard", "squirtle", "wartortle"];
   }
-
   componentDidMount() {
-    this.props.changeRegion();
+    this.props.changePoke();
   }
-
   render() {
-    console.log(this.props);
-    const { state, changeRegion } = this.props;
+    const { state, changePoke } = this.props;
     return (
       <div className="App">
         {state !== "error" ? (
@@ -24,11 +20,11 @@ class App extends React.Component {
             <header>
               <h1>Know Your Pokemon</h1>
             </header>
-            <div className="region-names">
+            <div className="poke-names">
               <h2>Select Pokemon :</h2>
               <select
-                id="region"
-                onChange={(e) => changeRegion(e.target.value)}
+                id="poke-names"
+                onChange={(e) => changePoke(e.target.value)}
               >
                 {this.allPoke.map((reg, i) => {
                   return (
@@ -40,7 +36,7 @@ class App extends React.Component {
               </select>
             </div>
 
-            <div className="country-names">
+            <div className="poke-abilities">
               <h2> Select Abilites : </h2>
               <select>
                 {state &&
@@ -54,7 +50,18 @@ class App extends React.Component {
               </select>
             </div>
             <div>
-              <PokeDetails state={state} />
+              <div className="details">
+                <div className="inner">
+                  <p>{`ID: ${this.props.state?.id}`}</p>
+                  <p>{`Name: ${this.props.state?.name}`}</p>
+                  <p>{`Height: ${this.props.state?.height}`}</p>
+                  <p>{`Weight: ${this.props.state?.weight}`}</p>
+                  <img
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.props.state?.id}.png`}
+                    alt="img"
+                  />
+                </div>
+              </div>
             </div>
           </>
         ) : (
@@ -73,8 +80,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeRegion: (value) => {
-      dispatch(loadCountry(value));
+    changePoke: (value) => {
+      dispatch(getPoke(value));
     },
   };
 };
