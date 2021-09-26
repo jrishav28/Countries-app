@@ -4,7 +4,7 @@ import loadCountry from "./actions";
 import "./App.css";
 import PokeDetails from "./components/PokeDetails";
 
-export class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.allPoke = ["charmeleon", "charizard", "squirtle", "wartortle"];
@@ -19,7 +19,7 @@ export class App extends React.Component {
     const { state, changeRegion } = this.props;
     return (
       <div className="App">
-        {state ? (
+        {state !== "error" ? (
           <>
             <header>
               <h1>Know Your Pokemon</h1>

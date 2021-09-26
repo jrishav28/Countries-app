@@ -1,23 +1,28 @@
-import React from "react";
+import App from "./App";
 import Enzyme, { shallow, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-Enzyme.configure({ adapter: new Adapter(), disableLifecycleMethods: false });
-import { App } from "./App";
-import configureStore from "redux-mock-store";
-import thunk from "redux-thunk";
+import React from "react";
+import { makeMockStore } from "./_tests_/_test_utils_/test_util";
+import { details } from "./_tests_/_test_utils_/test_Objects";
 
-describe("demo", () => {
-  it("sum", () => {
+Enzyme.configure({ adapter: new Adapter() });
+let store;
+const setUp = (initialState = {}) => {
+  store = makeMockStore(initialState);
+  const wrapper = shallow(<App store={store} />)
+    .childAt(0)
+    .dive();
+  return wrapper;
+};
+
+describe("App Component ", () => {
+  let wrapper;
+  beforeEach(() => {
+    const initialState = details[0];
+    wrapper = setUp(initialState);
+  });
+  it("display header component", () => {
+    console.log(wrapper.debug());
     expect(2 + 3).toBe(5);
   });
 });
-// const middlewares = [thunk];
-// const mockStore = configureStore(middlewares);
-// describe("App componen", () => {
-//   it("it Should Display Header", () => {
-//     const wrapper = mount(<App />);
-//     const text = wrapper.find("div header h1");
-//     expect(text.text()).toEqual("Know Your Pokemon");
-//   });
-// });
-//

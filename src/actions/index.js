@@ -5,7 +5,7 @@ const loadCountry =
   async (dispatch) => {
     // console.log(value);
     await axios
-      .get(`https://pokeapi.co/api/v2/pokemon/charizard`)
+      .get(`https://pokeapi.co/api/v2/pokemon/${value}`)
       .then((res) => {
         // console.log(res.data);
         if (res.status === 200) {
@@ -14,12 +14,12 @@ const loadCountry =
             data: res.data,
           });
         }
-        // return res.dat;
+        // return res.data;
       })
       .catch((error) => {
         return dispatch({
           type: "Fetch_Error",
-          data: false,
+          data: "error",
         });
       });
   };
