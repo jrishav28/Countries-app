@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import getPoke from "./actions";
+import getPoke from "../actions";
 import "./App.css";
 
 class App extends React.Component {
@@ -15,40 +15,38 @@ class App extends React.Component {
     const { state, changePoke } = this.props;
     return (
       <div className="App">
+        <header>
+          <h1>Know Your Pokemon</h1>
+        </header>
+        <div className="poke-names">
+          <h2>Select Pokemon :</h2>
+          <select id="poke-names" onChange={(e) => changePoke(e.target.value)}>
+            {this.allPoke.map((reg, i) => {
+              return (
+                <option key={i} value={reg}>
+                  {reg}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+
+        <div className="poke-abilities">
+          <h2> Select Abilites : </h2>
+          <select>
+            {state &&
+              state.abilities.map((data, i) => {
+                return (
+                  <option key={i} value={data.ability.name}>
+                    {data.ability.name}
+                  </option>
+                );
+              })}
+          </select>
+        </div>
+
         {state !== "error" ? (
           <>
-            <header>
-              <h1>Know Your Pokemon</h1>
-            </header>
-            <div className="poke-names">
-              <h2>Select Pokemon :</h2>
-              <select
-                id="poke-names"
-                onChange={(e) => changePoke(e.target.value)}
-              >
-                {this.allPoke.map((reg, i) => {
-                  return (
-                    <option key={i} value={reg}>
-                      {reg}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-
-            <div className="poke-abilities">
-              <h2> Select Abilites : </h2>
-              <select>
-                {state &&
-                  state.abilities.map((data, i) => {
-                    return (
-                      <option key={i} value={data.ability.name}>
-                        {data.ability.name}
-                      </option>
-                    );
-                  })}
-              </select>
-            </div>
             <div>
               <div className="details">
                 <div className="inner">

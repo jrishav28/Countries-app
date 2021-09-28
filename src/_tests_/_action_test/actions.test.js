@@ -4,7 +4,8 @@ import moxios from "moxios";
 import { makeMockStore } from "../_test_utils_/test_util";
 import getPoke from "../../actions";
 import { details } from "../_test_utils_/test_Objects";
-const store = makeMockStore({ data: null });
+
+const store = makeMockStore();
 
 Enzyme.configure({ adapter: new Adapter() });
 describe("actions check", () => {
@@ -36,7 +37,7 @@ describe("actions check", () => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
         status: 500,
-        response: false,
+        response: expectedState,
       });
     });
     store.dispatch(getPoke()).then(() => {
