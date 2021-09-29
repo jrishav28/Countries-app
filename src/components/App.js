@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/App.css";
+import "../App.css";
 import PokeDetails from "./PokeDetails";
 import SelectComp from "../containers/SelectCompContainer";
 
@@ -26,7 +26,7 @@ export class App extends React.Component {
           <PokeDetails />
         ) : (
           <>
-            <h3>* sorry, an error is detected </h3>
+            <h3>* sorry, an error occured </h3>
           </>
         )}
       </div>

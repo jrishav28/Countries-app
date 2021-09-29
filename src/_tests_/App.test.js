@@ -1,30 +1,36 @@
-import App from "../components/App";
-import Enzyme, { shallow, mount } from "enzyme";
+import { App } from "../components/App";
+import Enzyme, { shallow, mount, render } from "enzyme";
 import React from "react";
-import { makeMockStore } from "./_test_utils_/test_util";
-import { details } from "./_test_utils_/test_Objects";
-import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import { makeMockStore } from "./test_util/test_util";
+
+import Adapter from "enzyme-adapter-react-16";
+
 Enzyme.configure({ adapter: new Adapter() });
-let store;
 const setUp = (initialState = {}) => {
-  store = makeMockStore(initialState);
-  const wrapper = shallow(<App store={store} />);
+  const store = makeMockStore(initialState);
+  const wrapper = shallow(<App store={store} />, {
+    disableLifecycleMethods: true,
+  });
   return wrapper;
 };
 
 describe("App Component ", () => {
   let wrapper;
   beforeEach(() => {
-    const initialState = details[0];
+    const initialState = { data: "" };
     wrapper = setUp(initialState);
   });
 
-  it("should Display Header", () => {
+  it("should Display  Header", () => {
     const text = wrapper.find("div header h1");
     expect(text.text()).toEqual("Know Your Pokemon");
   });
 
-  it("shound show two select statements", () => {
-    expect(wrapper.find("select").length).toEqual(2);
+  it("shound show 1 Select Component", () => {
+    expect(wrapper.find("Connect(SelectComp)")).toHaveLength(1);
+  });
+
+  it("shound have PokeDetails Component", () => {
+    expect(wrapper.find("Connect(PokeDetails)")).toHaveLength(1);
   });
 });

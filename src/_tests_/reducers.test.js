@@ -1,7 +1,6 @@
-import pokeReducer from "../../reducers";
+import pokeReducer from "../reducers";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import { details } from "../_test_utils_/test_Objects";
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("Poke Reducer", () => {
@@ -10,7 +9,10 @@ describe("Poke Reducer", () => {
     expect(newState.data).toEqual(null);
   });
   it("Should return Charmeleon data", () => {
-    const expected_data = details[0];
+    const expected_data = {
+      name: "charmeleon",
+      abilities: ["blaze", "torrent"],
+    };
     const newState = pokeReducer(undefined, {
       type: "CHANGE_REGION",
       data: expected_data,
