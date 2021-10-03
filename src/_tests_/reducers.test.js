@@ -19,4 +19,14 @@ describe("Poke Reducer", () => {
     });
     expect(newState.data).toEqual(expected_data);
   });
+  it("Should give fetch error ", () => {
+    const expected_data = {
+      data: "error",
+    };
+    const newState = pokeReducer(undefined, {
+      type: "Fetch_Error",
+      data: expected_data,
+    });
+    expect(newState.data).toEqual(expected_data);
+  });
 });

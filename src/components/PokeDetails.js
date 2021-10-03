@@ -1,17 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-class PokeDetails extends Component {
+export class PokeDetails extends Component {
   render() {
     return (
       <div>
         <div>
           <div className="details">
             <div className="inner">
-              <p>{`ID: ${this.props.state?.id}`}</p>
-              <p>{`Name: ${this.props.state?.name}`}</p>
-              <p>{`Height: ${this.props.state?.height}`}</p>
-              <p>{`Weight: ${this.props.state?.weight}`}</p>
+              <p>
+                ID: <span>{this.props.state?.id}</span>
+              </p>
+              <p>
+                Name: <span>{this.props.state?.name}</span>
+              </p>
+              <p>
+                Height: <span>{this.props.state?.height}</span>
+              </p>
+              <p>
+                Weight: <span>{this.props.state?.weight}</span>
+              </p>
               <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.props.state?.id}.png`}
                 alt="img"
@@ -23,7 +31,7 @@ class PokeDetails extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   return {
     state: state.data,
   };

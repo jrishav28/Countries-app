@@ -4,10 +4,6 @@ import PokeDetails from "./PokeDetails";
 import SelectComp from "../containers/SelectCompContainer";
 
 export class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.props.changePoke();
   }
@@ -17,7 +13,7 @@ export class App extends React.Component {
     return (
       <div className="App">
         <header>
-          <h1>Know Your Pokemon</h1>
+          <h1 className="heading">Know Your Pokemon</h1>
         </header>
 
         <SelectComp state={state} />
@@ -25,9 +21,7 @@ export class App extends React.Component {
         {state !== "error" ? (
           <PokeDetails />
         ) : (
-          <>
-            <h3>* sorry, an error occured </h3>
-          </>
+          <h3>* sorry, an error occured </h3>
         )}
       </div>
     );

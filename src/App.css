@@ -47,6 +47,8 @@ h3 {
   color: rgb(231, 247, 15);
 }
 span {
+  /* text-decoration: underline;
+  text-decoration-color: black; */
   background-color: white;
   color: rgb(255, 0, 34);
   font-family: cursive;
@@ -79,16 +81,21 @@ span {
   border-radius: 5px;
   padding: 5px;
   width: 400px;
+  background-color: rgba(20, 27, 32, 0.596);
 }
+
 .details p {
+  /* border-radius: 5px; */
+  /* margin-bottom: 5px; */
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: x-large;
   font-weight: 600;
   background-color: rgb(255, 255, 255);
-  color: rgb(29, 29, 18);
+  color: rgb(61, 61, 38);
   padding: 5px;
 }
 .details img {
+  border-radius: 2px;
   background-color: rgb(231, 217, 190);
   margin-top: 4px;
   width: 400px;
